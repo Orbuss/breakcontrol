@@ -52,14 +52,21 @@ public class BlockBreakListener implements Listener {
             priority = EventPriority.HIGHEST
     )
     public void onEntityExplode(EntityExplodeEvent event) {
-        List<Block> spawners = new ArrayList();
-
-        for(Block block : event.blockList()) {
-            if (block.getType().equals(Material.SPAWNER)) {
-                spawners.add(block);
+        List<Block> blocksToProtect = new ArrayList<>();
+        List<Material> protectedBlocks = Arrays.asList(
+                Material.SPAWNER,
+                Material.TRIAL_SPAWNER,
+                Material.BUDDING_AMETHYST,
+                Material.VAULT,
+                Material.CHEST
+        );
+        for (Block block : event.blockList()) {
+            if (protectedBlocks.contains(block.getType())) {
+                blocksToProtect.add(block);
             }
         }
 
-        event.blockList().removeAll(spawners);
+        // Удаляем защищённые блоки из списка разрушения
+        event.blockList().removeAll(blocksToProtect);
     }
 }
