@@ -1,0 +1,9 @@
+name: breakcontrol
+version: '1.0'
+main: me.orbus.breakcontrol.Breakcontrol
+api-version: '1.21'
+authors: [ Orbus ]
+permissions:
+  unbreakablespawners.override:
+    description: Дает возможность ломать неломаемое
+    default: op
